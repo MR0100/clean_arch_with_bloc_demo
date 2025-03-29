@@ -1,0 +1,60 @@
+
+
+Flutter Test - Diamond Selection App
+
+Flutter-test-dataset.xlsx
+
+You will create a Flutter app that loads 100 diamonds dataset (provided as a file). The app should allow users to filter, sort, view, and add/remove diamonds from a persistent cart.
+---
+Dataset (Excel - 100 Diamonds) Columns:
+Lot ID, Size, Carat, Lab, Shape, Color, Clarity, Cut, Polish, Symmetry, Fluorescence, Discount, Per Carat Rate, Final Amount, Key To Symbol, Lab Comment 
+---
+App Requirements
+Page 1: Filter Page
+Users can filter diamonds based on: 
+ Carat (From & To)
+ Lab
+ Shape
+ Color
+ Clarity
+A "Search" button to apply filters and navigate to the Result Page. 
+
+Page 2: Result Page
+Displays filtered diamonds in a ListView. 
+Each item should display all diamond details. 
+Features: 
+ Sort Diamonds by:
+Final Price (Asc/Desc) 
+Carat Weight (Asc/Desc) 
+ Add/Remove diamonds from cart directly from the list.
+UI can be simple, but details should be easily readable. 
+
+Page 3: Cart Page (Persistent Storage)
+Displays all diamonds added to the cart. 
+Features: 
+ Remove diamonds from cart.
+ Cart data should persist even after app restart.
+ Show Summary as Total Carat, Total price, average price and average discount of all diamonds in the cart.
+
+
+
+
+
+
+
+Technical Requirements
+Use BLoC for State Management
+Keep excel data as dart models in data.dart file (No need to load data from excel)
+Cart data must persist in local storage
+Project structure should be clear & maintainable 
+
+
+Submission Instructions
+Submit your code in a GitHub repository or ZIP file. 
+Include a README.md explaining: 
+Project structure 
+State management logic 
+Persistent storage usage 
+
+
+
