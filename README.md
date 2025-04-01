@@ -1,14 +1,12 @@
 # kgk
 
-project showcasing the hands on experience working with bloc, get_it, dartz, clean architecture and many more.
+project showcasing the hands on experience working with bloc, get_it clean architecture and many more.
 
 ## Dependencies Used
 
 1. flutter_bloc
-1. dartz
 1. get_it
 1. json_serializable
-1. equatable
 
 ## Project Structure
 
