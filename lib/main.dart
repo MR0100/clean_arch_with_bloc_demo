@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kgk/core/router/app_router.dart';
+import 'package:kgk/core/utils/constants/app_shared_pref_key.dart';
 import 'package:kgk/core/utils/injections.dart';
 import 'package:kgk/feature/cart/presentation/bloc/cart_bloc.dart';
 import 'package:kgk/feature/onboarding/presentation/bloc/dashboard/dashboard_bloc.dart';
@@ -9,11 +10,9 @@ import 'package:kgk/feature/products/presentation/bloc/filter/filter_bloc.dart';
 import 'package:kgk/feature/products/presentation/bloc/product/product_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-late SharedPreferences preferences;
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  preferences = await SharedPreferences.getInstance();
+  pref = await SharedPreferences.getInstance();
 
   await initInjections();
   runApp(KGKApplication());
