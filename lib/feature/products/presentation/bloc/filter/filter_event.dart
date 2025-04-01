@@ -11,9 +11,3 @@ class UpdateFilterDataEvent extends FilterEvent {
 
   UpdateFilterDataEvent({required this.filter});
 }
-
-class ToggleProductCardEventFilter extends FilterEvent {
-  final int index;
-
-  ToggleProductCardEventFilter({required this.index});
-}

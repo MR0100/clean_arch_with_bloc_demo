@@ -63,23 +63,17 @@ class _ProductListingPageState extends State<ProductListingPage> {
               ProductDiamondSchema diamond = state.diamonds[index];
               return DiamondCardComponent(
                 diamond: diamond,
-                onExpand: () {
-                  di
-                      .get<ProductBloc>()
-                      .add(ToggleProductCardEventPrdEvent(index: index));
-                },
                 addToCart: () {
-                  di
-                      .get<ProductBloc>()
-                      .add(OnAddToCartProductEvent(index: index));
+                  di.get<ProductBloc>().add(OnCartCountUpdate(
+                      product: diamond, type: OnCartCountUpdateType.inc));
                 },
                 incCart: () {
                   di.get<ProductBloc>().add(OnCartCountUpdate(
-                      index: index, type: OnCartCountUpdateType.inc));
+                      product: diamond, type: OnCartCountUpdateType.inc));
                 },
                 decCart: () {
                   di.get<ProductBloc>().add(OnCartCountUpdate(
-                      index: index, type: OnCartCountUpdateType.dec));
+                      product: diamond, type: OnCartCountUpdateType.dec));
                 },
               );
             },

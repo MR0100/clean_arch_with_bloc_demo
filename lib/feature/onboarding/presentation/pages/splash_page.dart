@@ -21,7 +21,14 @@ class SplashPage extends StatelessWidget {
       },
       child: Scaffold(
         body: Center(
-          child: Text("KGK ~ Splash"),
+          child: Text(
+            "KGK\nSplash Screen",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );

@@ -5,13 +5,11 @@ import 'package:kgk/shared/presentation/widgets/buttons/app_button.dart';
 
 class DiamondCardComponent extends StatelessWidget {
   final ProductDiamondSchema diamond;
-  final VoidCallback onExpand;
   final VoidCallback addToCart;
   final VoidCallback incCart;
   final VoidCallback decCart;
   const DiamondCardComponent({
     required this.diamond,
-    required this.onExpand,
     required this.addToCart,
     required this.incCart,
     required this.decCart,
@@ -20,6 +18,7 @@ class DiamondCardComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ValueNotifier<bool> isExpanded = ValueNotifier(false);
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -109,7 +108,9 @@ class DiamondCardComponent extends StatelessWidget {
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: onExpand,
+                          onTap: () {
+                            isExpanded.value = !isExpanded.value;
+                          },
                           child: Container(
                             width: 30,
                             height: 30,
@@ -130,13 +131,18 @@ class DiamondCardComponent extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            child: Transform.rotate(
-                              angle: diamond.isExpanded ? 3.14 / 2 : 0,
-                              child: Icon(
-                                Icons.arrow_forward_ios_outlined,
-                                color: AppColors.kBlue,
-                                size: 20,
-                              ),
+                            child: ValueListenableBuilder<bool>(
+                              valueListenable: isExpanded,
+                              builder: (context, expanded, child) {
+                                return Transform.rotate(
+                                  angle: expanded || diamond.cartCount > 0 ? 3.14 / 2 : 0,
+                                  child: Icon(
+                                    Icons.arrow_forward_ios_outlined,
+                                    color: AppColors.kBlue,
+                                    size: 20,
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ),
@@ -255,17 +261,29 @@ class DiamondCardComponent extends StatelessWidget {
                     )
                     .toList()),
           ),
-          if (diamond.isExpanded) ...{
-            Divider(
-              color:
-                  AppColors.kPrimary.withAlpha(Color.getAlphaFromOpacity(0.1)),
-              height: 16,
-            ),
-            SizedBox(
-              height: 40,
-              child: _body(),
-            ),
-          },
+          ValueListenableBuilder<bool>(
+              valueListenable: isExpanded,
+              builder: (context, expanded, child) {
+                if (expanded || diamond.cartCount > 0) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Divider(
+                        color: AppColors.kPrimary
+                            .withAlpha(Color.getAlphaFromOpacity(0.1)),
+                        height: 16,
+                      ),
+                      SizedBox(
+                        height: 40,
+                        child: _body(),
+                      )
+                    ],
+                  );
+                }
+                return SizedBox();
+              },),
         ],
       ),
     );

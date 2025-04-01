@@ -16,6 +16,12 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     List<ProductDiamondSchema> cartItems =
         await di.get<FetchInitialCartDataUseCase>()(param: null);
 
-    emit(CartDataLoadedState(cartItems: cartItems));
+        cartItems.sort((a, b) => a.lotId.compareTo(b.lotId));
+  int count = 0;
+        for (ProductDiamondSchema e in cartItems){
+          count += e.cartCount;
+        }
+
+    emit(CartDataLoadedState(cartItems: cartItems, count: count));
   }
 }

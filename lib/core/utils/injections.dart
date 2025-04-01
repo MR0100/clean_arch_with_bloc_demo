@@ -1,4 +1,7 @@
 import 'package:get_it/get_it.dart';
+import 'package:kgk/feature/cart/data/repositories/cart_repo_impl.dart';
+import 'package:kgk/feature/cart/domain/repositories/cart_repo.dart';
+import 'package:kgk/feature/cart/domain/usecases/fetch_initial_cart_data_usecase.dart';
 import 'package:kgk/feature/cart/presentation/bloc/cart_bloc.dart';
 import 'package:kgk/feature/onboarding/presentation/bloc/dashboard/dashboard_bloc.dart';
 import 'package:kgk/feature/onboarding/presentation/bloc/splash/splash_bloc.dart';
@@ -29,7 +32,8 @@ Future<void> initInjections() async {
       () => ConverterRepoImpl(converterAPI: di.get<ConverterAPI>()),
     )
     ..registerLazySingleton<ProductRepo>(
-        () => ProductRepoImpl(productAPI: di.get<ProductAPI>()));
+        () => ProductRepoImpl(productAPI: di.get<ProductAPI>()))
+    ..registerLazySingleton<CartRepo>(() => CartRepoImpl());
 
   // register USE CASES instance.
   di
@@ -37,7 +41,9 @@ Future<void> initInjections() async {
       () => ConvertDataFromCsvUseCase(converterRepo: di.get<ConverterRepo>()),
     )
     ..registerLazySingleton<LoadProductUseCase>(
-        () => LoadProductUseCase(productRepo: di.get<ProductRepo>()));
+        () => LoadProductUseCase(productRepo: di.get<ProductRepo>()))
+    ..registerLazySingleton<FetchInitialCartDataUseCase>(
+        () => FetchInitialCartDataUseCase(cartRepo: di.get<CartRepo>()));
 
   // register BLOC.
   di

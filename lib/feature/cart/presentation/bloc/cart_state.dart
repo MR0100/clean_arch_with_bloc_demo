@@ -11,5 +11,6 @@ class InitialCartState extends CartState {
 }
 
 class CartDataLoadedState extends CartState {
-  CartDataLoadedState({required super.cartItems});
+  final int count; 
+  CartDataLoadedState({required this.count, required super.cartItems});
 }

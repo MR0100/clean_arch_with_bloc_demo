@@ -120,11 +120,6 @@ class FilterResultPage extends StatelessWidget {
                     ProductDiamondSchema diamond = state.diamonds[index];
                     return DiamondCardComponent(
                       diamond: diamond,
-                      onExpand: () {
-                        di
-                            .get<FilterBloc>()
-                            .add(ToggleProductCardEventFilter(index: index));
-                      },
                       addToCart: () {},
                       incCart: () {},
                       decCart: () {},

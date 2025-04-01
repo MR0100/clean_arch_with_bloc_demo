@@ -4,26 +4,14 @@ abstract class ProductEvent {}
 
 class FetchAllProductsPrdEvent extends ProductEvent {}
 
-class ToggleProductCardEventPrdEvent extends ProductEvent {
-  final int index;
-
-  ToggleProductCardEventPrdEvent({required this.index});
-}
-
-class OnAddToCartProductEvent extends ProductEvent {
-  final int index;
-
-  OnAddToCartProductEvent({required this.index});
-}
-
 enum OnCartCountUpdateType {
   inc,
   dec,
 }
 
 class OnCartCountUpdate extends ProductEvent {
-  final int index;
+  final ProductDiamondSchema product;
   final OnCartCountUpdateType type;
 
-  OnCartCountUpdate({required this.index, required this.type});
+  OnCartCountUpdate({required this.product, required this.type});
 }

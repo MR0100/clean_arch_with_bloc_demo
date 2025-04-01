@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:kgk/core/utils/constants/app_types.dart';
 
 class ProductDiamondSchema {
@@ -18,7 +20,6 @@ class ProductDiamondSchema {
   final double finalAmount;
   final String keyToSymbol;
   final String labComment;
-  final bool isExpanded;
   final int cartCount;
 
   ProductDiamondSchema({
@@ -39,7 +40,6 @@ class ProductDiamondSchema {
     required this.finalAmount,
     required this.keyToSymbol,
     required this.labComment,
-    this.isExpanded = false,
     this.cartCount = 0,
   });
 
@@ -64,6 +64,7 @@ class ProductDiamondSchema {
           double.parse(json['Final Amount'].toString().replaceAll(",", "")),
       keyToSymbol: json['Key To Symbol'],
       labComment: json['Lab Comment'].toString(),
+      cartCount: json['cart_count'] ?? 0,  
     );
   }
 
@@ -85,7 +86,6 @@ class ProductDiamondSchema {
     double? finalAmount,
     String? keyToSymbol,
     String? labComment,
-    bool? isExpanded,
     int? cartCount,
   }) =>
       ProductDiamondSchema(
@@ -107,6 +107,31 @@ class ProductDiamondSchema {
         keyToSymbol: keyToSymbol ?? this.keyToSymbol,
         labComment: labComment ?? this.labComment,
         cartCount: cartCount ?? this.cartCount,
-        isExpanded: isExpanded ?? this.isExpanded,
       );
+
+  Json toJson() => {
+        'Qty': qty,
+        'Lot ID': lotId,
+        'Size': size,
+        'Carat': carat,
+        'Lab': lab,
+        'Shape': shape,
+        'Color': color,
+        'Clarity': clarity,
+        'Cut': cut,
+        'Polish': polish,
+        'Symmetry': symmetry,
+        'Fluorescence': fluorescence,
+        'Discount': discount,
+        'Per Carat Rate': perCaratRate,
+        'Final Amount': finalAmount,
+        'Key To Symbol': keyToSymbol,
+        'Lab Comment': labComment,
+        'cart_count': cartCount, 
+      };
+
+  @override
+  String toString() {
+    return jsonEncode(toJson());
+  }
 }

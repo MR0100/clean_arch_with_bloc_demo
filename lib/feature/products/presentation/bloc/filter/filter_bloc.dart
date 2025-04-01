@@ -13,24 +13,6 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     on<OnFetchFilterDataEvent>(_onFetchFilterData);
     on<UpdateFilterDataEvent>(_onUpdateFilterData);
     on<OnApplyFilterEvent>(_onApplyFilter);
-    on<ToggleProductCardEventFilter>(_toggleProductCardExpansion);
-  }
-
-  Future<void> _toggleProductCardExpansion(
-      ToggleProductCardEventFilter event, Emitter<FilterState> emit) async {
-    // copy data in local state.
-    List<ProductDiamondSchema> data = state.diamonds;
-
-    // update the values inside isExpanded and update local state.
-    data[event.index] =
-        data[event.index].copyWith(isExpanded: !data[event.index].isExpanded);
-
-    // update global state according to local state.
-    emit(FilterApplySuccess(
-      defaultFilterData: state.defaultFilterData,
-      selectedFilterData: state.selectedFilterData,
-      diamonds: data,
-    ));
   }
 
   void _onApplyFilter(OnApplyFilterEvent event, Emitter<FilterState> emit) {
