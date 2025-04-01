@@ -37,7 +37,7 @@ class _ProductListingPageState extends State<ProductListingPage> {
               );
             },
             icon: Icon(
-              Icons.filter_list_outlined,
+              Icons.filter_alt_outlined,
               color: AppColors.kBlack,
               size: 25,
             ),

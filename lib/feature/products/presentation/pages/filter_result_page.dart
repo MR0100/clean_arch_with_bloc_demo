@@ -35,10 +35,68 @@ class FilterResultPage extends StatelessWidget {
               );
             },
             icon: Icon(
-              Icons.filter_list_outlined,
+              Icons.filter_alt_outlined,
               color: AppColors.kBlack,
               size: 25,
             ),
+          ),
+          VerticalDivider(
+            thickness: 1,
+            color: AppColors.kPrimary.withAlpha(Color.getAlphaFromOpacity(0.1)),
+            indent: 10,
+            endIndent: 10,
+          ),
+          PopupMenuButton<String> (
+            onSelected: (String selected){
+              if(selected == 'final_price_asc') {
+                di.get<FilterBloc>().add(OnSortByPrice(isAsc: true));
+              }
+              else if(selected == 'final_price_desc') {
+                di.get<FilterBloc>().add(OnSortByPrice(isAsc: false));
+              }
+              else if(selected == 'carat_weight_asc') {
+                di.get<FilterBloc>().add(OnSortByCaratWeight(isAsc: true));
+              }
+              else if(selected == 'carat_weight_desc') {
+                di.get<FilterBloc>().add(OnSortByCaratWeight(isAsc: false));
+              }
+            },
+            itemBuilder: (context) => [
+              {
+                "title": "Final Price (Asc)", 
+                "value": "final_price_asc",
+              },{
+                "title": "Final Price (Desc)", 
+                "value": "final_price_desc",
+              },{
+                "title": "Carat Weight (Asc)", 
+                "value": "carat_weight_asc",
+              },{
+                "title": "Carat Weight (Dsc)", 
+                "value": "carat_weight_desc",
+              }
+            ].map((Map<String, dynamic> e) => PopupMenuItem<String>(
+                value: e['value'],
+                child: Text(
+                  "${e['title']}",
+                ),
+              ),).toList(),
+            child: Row(
+              children: [
+                Text('Sort By'),
+                SizedBox(width: 4),
+                Icon(
+                  Icons.filter_list_outlined,
+                  size: 18,
+                ),
+              ],
+            ),
+          ),
+          VerticalDivider(
+            thickness: 1,
+            color: AppColors.kPrimary.withAlpha(Color.getAlphaFromOpacity(0.1)),
+            indent: 10,
+            endIndent: 10,
           ),
         ],
         bottom: PreferredSize(

@@ -11,3 +11,17 @@ class UpdateFilterDataEvent extends FilterEvent {
 
   UpdateFilterDataEvent({required this.filter});
 }
+
+
+class OnSortByPrice extends FilterEvent{ 
+  final bool isAsc;
+
+  OnSortByPrice({required this.isAsc}); 
+}
+
+class OnSortByCaratWeight extends FilterEvent{ 
+  final bool isAsc;
+
+  OnSortByCaratWeight({required this.isAsc});
+  
+}

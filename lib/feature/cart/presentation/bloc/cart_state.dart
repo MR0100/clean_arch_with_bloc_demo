@@ -11,6 +11,19 @@ class InitialCartState extends CartState {
 }
 
 class CartDataLoadedState extends CartState {
-  final int count; 
-  CartDataLoadedState({required this.count, required super.cartItems});
+  final int count;
+  final double totalPrice;
+  final double avgPrice;
+  final double totalCarat;
+  final double avgDiscount;
+  final double netAmount;
+  CartDataLoadedState({
+    required this.totalPrice,
+    required this.avgDiscount,
+    required this.avgPrice,
+    required this.totalCarat,
+    required this.count,
+    required this.netAmount,
+    required super.cartItems,
+  });
 }

@@ -13,6 +13,44 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
     on<OnFetchFilterDataEvent>(_onFetchFilterData);
     on<UpdateFilterDataEvent>(_onUpdateFilterData);
     on<OnApplyFilterEvent>(_onApplyFilter);
+    on<OnSortByPrice>(_onSortByPrice);
+    on<OnSortByCaratWeight>(_onSortByCarat);
+  }
+
+  void _onSortByCarat(OnSortByCaratWeight event, Emitter<FilterState> emit) {
+    List<ProductDiamondSchema> items = state.diamonds;
+
+    if (event.isAsc) {
+      items.sort((a, b) => a.carat.compareTo(b.carat));
+    } else {
+      items.sort((a, b) => b.carat.compareTo(a.carat));
+    }
+
+    emit(
+      FilterApplySuccess(
+        defaultFilterData: state.defaultFilterData,
+        selectedFilterData: state.selectedFilterData,
+        diamonds: items,
+      ),
+    );
+  }
+
+  void _onSortByPrice(OnSortByPrice event, Emitter<FilterState> emit) {
+    List<ProductDiamondSchema> items = state.diamonds;
+
+    if (event.isAsc) {
+      items.sort((a, b) => a.perCaratRate.compareTo(b.perCaratRate));
+    } else {
+      items.sort((a, b) => b.perCaratRate.compareTo(a.perCaratRate));
+    }
+
+    emit(
+      FilterApplySuccess(
+        defaultFilterData: state.defaultFilterData,
+        selectedFilterData: state.selectedFilterData,
+        diamonds: items,
+      ),
+    );
   }
 
   void _onApplyFilter(OnApplyFilterEvent event, Emitter<FilterState> emit) {
